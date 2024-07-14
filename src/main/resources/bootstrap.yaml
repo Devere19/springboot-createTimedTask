@@ -1,0 +1,50 @@
+quectel:
+  nacos:
+    server-addr: 192.168.10.35:8848
+    namespace: 06166fdf-7416-4744-b8d6-8b87c52ae9f8
+    group: DEFAULT_GROUP
+  mysql:
+    server: 192.168.10.28
+    port: 3306
+    uname: root
+    pwd: QuecTel!123
+  redis:
+    server: 192.168.10.89:7001,192.168.10.89:7002,192.168.10.89:7003,192.168.10.89:7004,192.168.10.89:7005,192.168.10.89:7006
+    port: 6379
+    uname:
+    pwd: Fx6p3w9JEyXuMiUu
+  gateway:
+    server: 192.168.29.101
+    port: 80
+  job:
+    accessToken:
+    executor:
+      appname: abner
+      ip:
+      port: 35562
+      logpath: /data/applogs/xxl-job/jobhandler
+      logretentiondays: 30
+spring:
+  application:
+    name: abner
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${quectel.nacos.server-addr}
+        namespace: ${quectel.nacos.namespace}
+        group: ${quectel.nacos.group}
+      config:
+        server-addr: ${quectel.nacos.server-addr}
+        namespace: ${quectel.nacos.namespace}
+        file-extension: yaml
+        group: ${quectel.nacos.group}
+        extension-configs:
+          - data-id: shared.yml
+            group: ${quectel.nacos.group}
+            refresh: true
+  main:
+    allow-bean-definition-overriding: true
+  messages:
+    basename: i18n/messages
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
